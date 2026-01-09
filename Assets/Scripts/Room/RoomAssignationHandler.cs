@@ -26,8 +26,17 @@ public class RoomAssignationHandler : MonoBehaviour
         AssignRoomInfos(RoomManager.CurrentRoomId, RoomManager.CurrentRoomData, RoomManager.CurrentActiveDays);
     }
 
-    public void AssignRoomInfos(string id, RoomData data, List<int> activeDays)
+    public async void AssignRoomInfos(string id, RoomData data, List<int> activeDays)
     {
+        var other = new Dictionary<string, object>
+            {
+                { "playerId", RoomManager.OtherPlayer}
+            };
+
+        var empty = await CloudCodeService.Instance.CallEndpointAsync<object>("RoomChecker", other);
+
+        if (!(bool)empty) return;
+
         _roomPanel.SetActive(true);
         _animalName.text = data.AnimalName;
 

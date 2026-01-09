@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
+using Unity.Services.CloudCode;
 using UnityEngine;
 
 public class RoomCreationHandler : MonoBehaviour
@@ -19,9 +21,20 @@ public class RoomCreationHandler : MonoBehaviour
         _roomPanel.SetActive(RoomManager.CurrentRoomId != string.Empty);
     }
 
-    public void CreateRoom()
+    public async void CreateRoom()
     {
-        if(_animalName.text == string.Empty || _otherID.text == string.Empty)
+        var other = new Dictionary<string, object>
+            {
+                { "playerId", _otherID.text}
+            };
+
+        RoomManager.OtherPlayer = _otherID.text;
+
+        var empty = await CloudCodeService.Instance.CallEndpointAsync<object>("RoomChecker", other);
+
+        if (!(bool)empty) return;
+
+        if (_animalName.text == string.Empty || _otherID.text == string.Empty)
         {
             Debug.LogWarning("Values aren't all assigned !");
             return;

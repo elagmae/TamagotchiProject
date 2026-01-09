@@ -11,6 +11,8 @@ public static class RoomManager
     public static string CurrentPlayerAnimalName { get; set; }
     public static List<int> CurrentActiveDays { get; set; }
 
+    public static string OtherPlayer;
+
     public static async void UpdateRoom(string roomId, string json, string otherPlayer, string animalName, string playerId, string _otherDays, string activeDays)
     {
         try
@@ -26,9 +28,15 @@ public static class RoomManager
                 {"otherDays", _otherDays }
             };
 
-            var response = await CloudCodeService.Instance.CallEndpointAsync<object>("ItemSetter", parameters);
+            var other = new Dictionary<string, object>
+            {
+                { "playerId", otherPlayer}
+            };
 
-            if (!(bool)response) return;
+            await CloudCodeService.Instance.CallEndpointAsync<object>("ItemSetter", parameters);
+            var empty = await CloudCodeService.Instance.CallEndpointAsync<object>("RoomChecker", other);
+
+            if (!(bool)empty) return;
 
             CurrentRoomId = roomId;
             CurrentRoomData = JsonUtility.FromJson<RoomData>(json);
