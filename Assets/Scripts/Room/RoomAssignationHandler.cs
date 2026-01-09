@@ -1,6 +1,9 @@
-using TMPro;
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Services.CloudCode;
+using Unity.Services.Core;
+using UnityEngine;
 
 public class RoomAssignationHandler : MonoBehaviour
 {
@@ -10,6 +13,8 @@ public class RoomAssignationHandler : MonoBehaviour
     private List<TextMeshProUGUI> _animalStatesTexts;
     [SerializeField]
     private GameObject _roomPanel;
+    [SerializeField]
+    private GameObject _block;
 
     private void Awake()
     {
@@ -18,21 +23,49 @@ public class RoomAssignationHandler : MonoBehaviour
 
     public void OpenRoom()
     {
-        AssignRoomInfos(RoomManager.CurrentRoomId, RoomManager.CurrentRoomData);
+        AssignRoomInfos(RoomManager.CurrentRoomId, RoomManager.CurrentRoomData, RoomManager.CurrentActiveDays);
     }
 
-    public void AssignRoomInfos(string id, RoomData data)
+    public void AssignRoomInfos(string id, RoomData data, List<int> activeDays)
     {
         _roomPanel.SetActive(true);
         _animalName.text = data.AnimalName;
 
-        print(data);
-        print(data.AnimalStates.Count);
-        print(data.AnimalStates[0].Value);
-
         for(int i = 0; i < data.AnimalStates.Count; i++)
         {
             _animalStatesTexts[i].text = $"{data.AnimalStates[i].Level} : {data.AnimalStates[i].Value}%";
+        }
+
+        DaysVerif();
+    }
+
+    public async void DaysVerif()
+    {
+        print("verif...");
+
+        try
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "playerId", Unity.Services.Authentication.AuthenticationService.Instance.PlayerId }
+            };
+
+            var response = await CloudCodeService.Instance.CallEndpointAsync<object>("DayAnalyzer", parameters);
+
+            if (!(bool)response)
+            {
+                _block.SetActive(true);
+                return;
+            }
+
+            _block.SetActive(false);
+            Debug.Log("Values updated successfully !");
+        }
+
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            Debug.LogWarning("Failed to update, check your assignations andd try again !");
         }
     }
 }

@@ -33,10 +33,10 @@ public class RoomCreationHandler : MonoBehaviour
             ParentNote = "",
             AnimalStates = new List<AnimalState>
             {
-                new AnimalState { Level = "HUNGER", Value = 100f },
-                new AnimalState { Level = "SLEEP", Value = 100f },
-                new AnimalState { Level = "HYGIENE", Value = 100f },
-                new AnimalState { Level = "FUN", Value = 100f }
+                new AnimalState { Level = AnimalLevel.HUNGER, Value = 100f },
+                new AnimalState { Level = AnimalLevel.SLEEP, Value = 100f },
+                new AnimalState { Level = AnimalLevel.HYGIENE, Value = 100f },
+                new AnimalState { Level = AnimalLevel.FUN, Value = 100f }
             },
         };
 
@@ -46,10 +46,10 @@ public class RoomCreationHandler : MonoBehaviour
             JsonUtility.ToJson(RoomManager.CurrentRoomData),
             _otherID.text,
             _animalName.text,
-            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId
+            Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
+            JsonUtility.ToJson(ActiveDaysHandler.OtherDays),
+            JsonUtility.ToJson(ActiveDaysHandler.ActiveDays)
         );
-
-        print(JsonUtility.ToJson(RoomManager.CurrentRoomData));
 
         // Assign Active Days (Player Data) => cf. Cloud Save.
     }

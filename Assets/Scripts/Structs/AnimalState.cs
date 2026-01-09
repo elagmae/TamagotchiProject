@@ -3,6 +3,6 @@ using System;
 [Serializable]
 public struct AnimalState
 {
-    public string Level;
+    public AnimalLevel Level;
     public float Value;
 }
