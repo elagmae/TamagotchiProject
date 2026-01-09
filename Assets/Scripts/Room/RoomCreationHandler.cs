@@ -50,7 +50,5 @@ public class RoomCreationHandler : MonoBehaviour
             JsonUtility.ToJson(ActiveDaysHandler.OtherDays),
             JsonUtility.ToJson(ActiveDaysHandler.ActiveDays)
         );
-
-        // Assign Active Days (Player Data) => cf. Cloud Save.
     }
 }

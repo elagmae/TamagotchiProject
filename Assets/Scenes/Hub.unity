@@ -238,7 +238,7 @@ MonoBehaviour:
   - {fileID: 2129826188}
   - {fileID: 1790571462}
   _roomPanel: {fileID: 536712980}
-  _block: {fileID: 0}
+  _block: {fileID: 1528176879}
 --- !u!1 &111663777
 GameObject:
   m_ObjectHideFlags: 0

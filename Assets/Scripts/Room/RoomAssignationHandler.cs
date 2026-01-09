@@ -41,7 +41,6 @@ public class RoomAssignationHandler : MonoBehaviour
 
     public async void DaysVerif()
     {
-        print("verif...");
 
         try
         {
@@ -52,20 +51,14 @@ public class RoomAssignationHandler : MonoBehaviour
 
             var response = await CloudCodeService.Instance.CallEndpointAsync<object>("DayAnalyzer", parameters);
 
-            if (!(bool)response)
-            {
-                _block.SetActive(true);
-                return;
-            }
-
-            _block.SetActive(false);
+            _block.SetActive(!(bool)response);
             Debug.Log("Values updated successfully !");
         }
 
         catch (Exception e)
         {
             Debug.LogError(e);
-            Debug.LogWarning("Failed to update, check your assignations andd try again !");
+            Debug.LogWarning("Failed to update, check your assignations and try again !");
         }
     }
 }

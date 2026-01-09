@@ -17,6 +17,9 @@ public class AuthenticationTestHandler : MonoBehaviour
     public async void SignUp()
     {
        await AuthenticationManager.SignUpWithUsernamePasswordAsync(_id.text.Trim(), _mdp.text.Trim());
+       AuthenticationManager.UserId = Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
+
+       if (Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn) SceneManager.LoadScene("Hub");
     }
 
     public async void SignIn()

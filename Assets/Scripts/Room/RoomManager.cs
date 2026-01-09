@@ -40,7 +40,7 @@ public static class RoomManager
         catch (Exception e)
         {
             Debug.LogError(e);
-            Debug.LogWarning("Failed to update, check your assignations andd try again !");
+            Debug.LogWarning("Failed to update, check your assignations and try again !");
         }
     }
 }
