@@ -50,7 +50,7 @@ public class RoomAssignationHandler : MonoBehaviour
             };
 
             var response = await CloudCodeService.Instance.CallEndpointAsync<object>("DayAnalyzer", parameters);
-
+            print(response);
             _block.SetActive(!(bool)response);
             Debug.Log("Values updated successfully !");
         }
