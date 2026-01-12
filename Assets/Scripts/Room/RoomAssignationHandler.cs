@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.CloudCode;
 using Unity.Services.Core;
@@ -49,6 +50,7 @@ public class RoomAssignationHandler : MonoBehaviour
                 { "playerId", Unity.Services.Authentication.AuthenticationService.Instance.PlayerId }
             };
 
+            await Task.Delay(100);
             var response = await CloudCodeService.Instance.CallEndpointAsync<object>("DayAnalyzer", parameters);
             print(response);
             _block.SetActive(!(bool)response);
