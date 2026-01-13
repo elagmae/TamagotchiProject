@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
     public bool CanPlay { get; set; }
-    public RoomData RoomData { get; set; }
+    public RoomData RoomData { get; set; } = new() { AnimalStates = new(), AnimalName = "" , ParentNote = "", LastConnection = DateTime.Now};
     public string RoomId { get; set; }
 
     private void Awake()
@@ -83,6 +83,19 @@ public class RoomManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError(e);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        try
+        {
+            UpdateRoom();
+        }
+
+        catch
+        {
+
         }
     }
 }

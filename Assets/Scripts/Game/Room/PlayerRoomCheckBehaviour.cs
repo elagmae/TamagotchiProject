@@ -29,7 +29,7 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
                 Dictionary<string, Unity.Services.CloudSave.Models.Item> room = await CloudSaveService.Instance.Data.Custom.LoadAllAsync(RoomManager.Instance.RoomId);
                 Unity.Services.CloudSave.Internal.Http.IDeserializable infos = room[RoomManager.Instance.RoomId].Value;
 
-                RoomManager.Instance.RoomData = JsonUtility.FromJson<RoomData>(infos.GetAs<string>());
+                RoomManager.Instance.RoomData = infos.GetAs<RoomData>();
 
                 Dictionary<string, object> playerId = new Dictionary<string, object>
                 {

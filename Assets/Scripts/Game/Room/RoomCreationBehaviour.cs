@@ -37,10 +37,10 @@ public class RoomCreationBehaviour : MonoBehaviour
                 AnimalName = _animalDisplay.text,
                 AnimalStates = new List<AnimalState>()
             {
-                new AnimalState { Level = AnimalLevel.HUNGER, Value = 100f },
-                new AnimalState { Level = AnimalLevel.HYGIENE, Value = 100f },
-                new AnimalState { Level = AnimalLevel.FUN, Value = 100f },
-                new AnimalState { Level = AnimalLevel.SLEEP, Value = 100f }
+                new AnimalState { Level = AnimalLevel.HUNGER, Value = 1f},
+                new AnimalState { Level = AnimalLevel.HYGIENE, Value = 1f },
+                new AnimalState { Level = AnimalLevel.FUN, Value = 1f },
+                new AnimalState { Level = AnimalLevel.SLEEP, Value = 1f }
             },
                 LastConnection = System.DateTime.Now,
                 ParentNote = ""

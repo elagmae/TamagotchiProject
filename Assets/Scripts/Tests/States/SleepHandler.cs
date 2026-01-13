@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SleepBehaviour : MonoBehaviour
+public class SleepHandler : MonoBehaviour
 {
     [SerializeField]
     private Image _sleepState;
