@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Unity.Services.CloudSave;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public static class SaveManager
 {
     public static event Action<string, RoomData, List<int>> OnRoomUpdated;
 
-    private static string _json;
+    private static RoomData _save;
 
     public static async void GetRoom()
     {
@@ -19,10 +20,11 @@ public static class SaveManager
 
             var customItemData = await CloudSaveService.Instance.Data.Custom.LoadAllAsync(id);
             var value = customItemData[id].Value;
-            _json = value.GetAs<string>();
+
+            _save = value.GetAs<RoomData>();
 
             RoomManager.CurrentRoomId = id;
-            RoomManager.CurrentRoomData = JsonUtility.FromJson<RoomData>(_json);
+            RoomManager.CurrentRoomData = _save;
             RoomManager.CurrentActiveDays = JsonUtility.FromJson<List<int>>(days);
 
             OnRoomUpdated?.Invoke(RoomManager.CurrentRoomId, RoomManager.CurrentRoomData, RoomManager.CurrentActiveDays);
@@ -30,7 +32,7 @@ public static class SaveManager
 
         catch (Exception e)
         {
-            Debug.Log("No Room found for this player.");
+            Debug.Log(e);
         }
 
     }
