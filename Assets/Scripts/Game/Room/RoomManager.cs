@@ -90,6 +90,7 @@ public class RoomManager : MonoBehaviour
     {
         try
         {
+            if (!Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn) return;
             UpdateRoom();
         }
 

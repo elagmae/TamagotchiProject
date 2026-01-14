@@ -6,8 +6,13 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager Instance;
 
+    private StatesBeforeLoadBehaviour _statesBeforeLoad;
+
     [field:SerializeField]
     public SerializedDictionary<AnimalLevel, Image> StateFills { get; private set; }
+
+    [field: SerializeField]
+    public SerializedDictionary<AnimalLevel, float> DecreasingSpeeds { get; private set; }
 
     private void Awake()
     {
@@ -22,9 +27,12 @@ public class StateManager : MonoBehaviour
 
     private void Start()
     {
-        foreach(AnimalLevel level in StateFills.Keys)
+        TryGetComponent(out _statesBeforeLoad);
+
+        foreach (AnimalLevel level in StateFills.Keys)
         {
             StateFills[level].fillAmount = RoomManager.Instance.RoomData.AnimalStates[(int)level].Value;
+            _statesBeforeLoad.CalculateAwayFills(level);
         }
     }
 

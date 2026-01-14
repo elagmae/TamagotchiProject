@@ -8,6 +8,8 @@ using UnityEngine;
 public class PlayerRoomCheckBehaviour : MonoBehaviour
 {
     private AuthenticationBehaviour _auth;
+    [SerializeField]
+    private RectTransform _loadingPanel;
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
     {
         try
         {
+            _loadingPanel.gameObject.SetActive(true);
             Dictionary<string, Unity.Services.CloudSave.Models.Item> playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { "CurrentRoom", "CurrentDays" }); ;
             
             if(playerData.ContainsKey("CurrentRoom"))

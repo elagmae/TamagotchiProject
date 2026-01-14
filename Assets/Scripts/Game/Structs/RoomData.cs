@@ -8,4 +8,5 @@ public struct RoomData
     public string ParentNote;
     public List<AnimalState> AnimalStates;
     public DateTime LastConnection;
+    public bool IsAsleep;
 }
