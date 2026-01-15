@@ -1,4 +1,5 @@
 using AYellowpaper.SerializedCollections;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,13 +7,12 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager Instance;
 
+    public event Action<AnimalLevel, float> OnFillUpdated;
+
     private StatesBeforeLoadBehaviour _statesBeforeLoad;
 
     [field:SerializeField]
-    public SerializedDictionary<AnimalLevel, Image> StateFills { get; private set; }
-
-    [field: SerializeField]
-    public SerializedDictionary<AnimalLevel, float> DecreasingSpeeds { get; private set; }
+    public SerializedDictionary<AnimalLevel, State> StateFills { get; private set; }
 
     private void Awake()
     {
@@ -23,15 +23,12 @@ public class StateManager : MonoBehaviour
         }
 
         Instance = this;
-    }
 
-    private void Start()
-    {
         TryGetComponent(out _statesBeforeLoad);
 
         foreach (AnimalLevel level in StateFills.Keys)
         {
-            StateFills[level].fillAmount = RoomManager.Instance.RoomData.AnimalStates[(int)level].Value;
+            StateFills[level].Fill.fillAmount = RoomManager.Instance.RoomData.AnimalStates[(int)level].Value;
             _statesBeforeLoad.CalculateAwayFills(level);
         }
     }
@@ -41,7 +38,11 @@ public class StateManager : MonoBehaviour
         AnimalState state = RoomManager.Instance.RoomData.AnimalStates[(int)level];
         state.Value += amount;
 
-        StateFills[level].fillAmount = state.Value;
+        if (state.Value > 1f) state.Value = 1f;
+
+        StateFills[level].Fill.fillAmount = state.Value;
+        OnFillUpdated?.Invoke(level, state.Value);
+
         RoomManager.Instance.RoomData.AnimalStates[(int)level] = state;
     }
 
@@ -50,7 +51,11 @@ public class StateManager : MonoBehaviour
         AnimalState state = RoomManager.Instance.RoomData.AnimalStates[(int)level];
         state.Value -= amount;
 
-        StateFills[level].fillAmount = state.Value;
+        if (state.Value < 0f) state.Value = 0f;
+
+        StateFills[level].Fill.fillAmount = state.Value;
+        OnFillUpdated?.Invoke(level, state.Value);
+
         RoomManager.Instance.RoomData.AnimalStates[(int)level] = state;
     }
 }

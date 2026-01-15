@@ -9,9 +9,9 @@ public class StatesBeforeLoadBehaviour : MonoBehaviour
 
         if(level == AnimalLevel.SLEEP && RoomManager.Instance.RoomData.IsAsleep)
         {
-            StateManager.Instance.AddToState(level, (float)timeAway * Time.deltaTime * StateManager.Instance.DecreasingSpeeds[level]);
+            StateManager.Instance.AddToState(level, (float)timeAway * Time.deltaTime * StateManager.Instance.StateFills[level].DecreasingSpeed);
         }
 
-        StateManager.Instance.RemoveFromState(level, (float)timeAway * Time.deltaTime * StateManager.Instance.DecreasingSpeeds[level]);
+        StateManager.Instance.RemoveFromState(level, (float)timeAway * Time.deltaTime * StateManager.Instance.StateFills[level].DecreasingSpeed);
     }
 }

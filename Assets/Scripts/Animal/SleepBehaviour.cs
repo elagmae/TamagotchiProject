@@ -18,14 +18,14 @@ public class SleepBehaviour : MonoBehaviour
 
         if (StateManager.Instance != null)
         {
-            if (RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].fillAmount < 1f)
+            if (RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount < 1f)
             {
-                StateManager.Instance.AddToState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.DecreasingSpeeds[AnimalLevel.SLEEP]);
+                StateManager.Instance.AddToState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed);
             }
 
-            else if (!RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].fillAmount > 0f)
+            else if (!RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount > 0f)
             {
-                StateManager.Instance.RemoveFromState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.DecreasingSpeeds[AnimalLevel.SLEEP]);
+                StateManager.Instance.RemoveFromState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed);
             }
         }
     }
