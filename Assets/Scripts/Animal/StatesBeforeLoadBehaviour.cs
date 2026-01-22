@@ -5,6 +5,8 @@ public class StatesBeforeLoadBehaviour : MonoBehaviour
 {
     public void CalculateAwayFills(AnimalLevel level)
     {
+        if (RoomManager.Instance.RoomData.LastConnection.Year < 2000) return;
+
         double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds;
 
         if(level == AnimalLevel.SLEEP && RoomManager.Instance.RoomData.IsAsleep)

@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public struct RoomData
 {
     public string AnimalName;
-    public string ParentNote;
     public List<AnimalState> AnimalStates;
     public DateTime LastConnection;
     public bool IsAsleep;
+    public string[] Parents;
 }

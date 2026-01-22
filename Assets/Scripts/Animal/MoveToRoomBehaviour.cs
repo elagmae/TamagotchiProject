@@ -33,5 +33,8 @@ public class MoveToRoomBehaviour : MonoBehaviour
         if (_currentRoomIndex + direction > StateManager.Instance.StateFills.Count && direction == 1) _currentRoomIndex = 0;
 
         _rooms.anchoredPosition = new Vector2(-_currentRoomIndex * _rooms.rect.width, _rooms.anchoredPosition.y);
+
+        StateManager.Instance.Animal.transform.SetParent(_rooms.GetChild(_currentRoomIndex), false);
+        StateManager.Instance.Animal.transform.SetSiblingIndex(0);
     }
 }

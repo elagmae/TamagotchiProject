@@ -1,21 +1,36 @@
 using AYellowpaper.SerializedCollections;
 using System;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
+    #region Initialization
+
     public static StateManager Instance;
 
     public event Action<AnimalLevel, float> OnFillUpdated;
 
-    private StatesBeforeLoadBehaviour _statesBeforeLoad;
-
     [field:SerializeField]
     public SerializedDictionary<AnimalLevel, State> StateFills { get; private set; }
 
+    [field : SerializeField]
+    public FoodInventoryHandler FoodInventoryHandler { get; private set; }
+
+    [field: SerializeField]
+    public Image Animal { get;private set; }
+
+    [SerializeField]
+    private TextMeshProUGUI _animalName;
+
+    private StatesBeforeLoadBehaviour _statesBeforeLoad;
+
     private void Awake()
     {
+        #region Singleton Pattern
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -24,12 +39,45 @@ public class StateManager : MonoBehaviour
 
         Instance = this;
 
+        #endregion
+
         TryGetComponent(out _statesBeforeLoad);
+
+        if (RoomManager.Instance == null) return;
+
+        #region Initialize States
 
         foreach (AnimalLevel level in StateFills.Keys)
         {
             StateFills[level].Fill.fillAmount = RoomManager.Instance.RoomData.AnimalStates[(int)level].Value;
             _statesBeforeLoad.CalculateAwayFills(level);
+
+            OnFillUpdated?.Invoke(level, RoomManager.Instance.RoomData.AnimalStates[(int)level].Value);
+        }
+
+        #endregion
+
+        _animalName.text = RoomManager.Instance.RoomData.AnimalName;
+
+        if (RoomManager.Instance.RoomData.LastConnection.Year < 2000) return;
+        double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds;
+
+        if ((int)timeAway / 10 < 0) return;
+        RoomManager.Instance.ChangeMoneyAmount(RoomManager.Instance.Money + (int)timeAway / 10);
+    }
+
+    #endregion
+
+    private async void Update()
+    {
+        foreach (AnimalLevel level in StateFills.Keys)
+        {
+            await Task.Delay(1000);
+
+            if (Instance != null && StateFills != null && StateFills[level].Fill.fillAmount > 0f && level != AnimalLevel.SLEEP)
+            {
+                RemoveFromState(level, Time.deltaTime * StateFills[level].DecreasingSpeed);
+            }
         }
     }
 
@@ -57,5 +105,10 @@ public class StateManager : MonoBehaviour
         OnFillUpdated?.Invoke(level, state.Value);
 
         RoomManager.Instance.RoomData.AnimalStates[(int)level] = state;
+    }
+
+    private void OnDestroy()
+    {
+        OnFillUpdated = null;
     }
 }

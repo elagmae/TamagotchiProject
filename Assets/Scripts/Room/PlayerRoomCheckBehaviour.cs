@@ -22,12 +22,22 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
         try
         {
             _loadingPanel.gameObject.SetActive(true);
-            Dictionary<string, Unity.Services.CloudSave.Models.Item> playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { "CurrentRoom", "CurrentDays" }); ;
-            
-            if(playerData.ContainsKey("CurrentRoom"))
+            Dictionary<string, Unity.Services.CloudSave.Models.Item> playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { "CurrentRoom", "CurrentDays", "Money" });
+
+            await Unity.Services.CloudSave.CloudSaveService.Instance.Data.Player.SaveAsync
+            (
+                new Dictionary<string, object>
+                {
+                    { "Money", 0 }
+                }
+            );
+
+            if (playerData.ContainsKey("CurrentRoom"))
             {
                 RoomManager.Instance.RoomId = playerData["CurrentRoom"].Value.GetAs<string>();
                 string activeDays = playerData["CurrentDays"].Value.GetAs<string>();
+
+                RoomManager.Instance.Money = playerData["Money"].Value.GetAs<int>();
 
                 Dictionary<string, Unity.Services.CloudSave.Models.Item> room = await CloudSaveService.Instance.Data.Custom.LoadAllAsync(RoomManager.Instance.RoomId);
                 Unity.Services.CloudSave.Internal.Http.IDeserializable infos = room[RoomManager.Instance.RoomId].Value;

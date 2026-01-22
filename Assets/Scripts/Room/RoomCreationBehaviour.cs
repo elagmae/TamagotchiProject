@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Unity.Services.Core;
 using System.Threading.Tasks;
 
 public class RoomCreationBehaviour : MonoBehaviour
@@ -36,14 +35,19 @@ public class RoomCreationBehaviour : MonoBehaviour
             {
                 AnimalName = _animalDisplay.text,
                 AnimalStates = new List<AnimalState>()
-            {
-                new AnimalState { Level = AnimalLevel.HUNGER, Value = 1f},
-                new AnimalState { Level = AnimalLevel.HYGIENE, Value = 1f },
-                new AnimalState { Level = AnimalLevel.FUN, Value = 1f },
-                new AnimalState { Level = AnimalLevel.SLEEP, Value = 1f }
-            },
-                LastConnection = System.DateTime.Now,
-                ParentNote = ""
+                {
+                    new AnimalState { Level = AnimalLevel.HUNGER, Value = 1f},
+                    new AnimalState { Level = AnimalLevel.HYGIENE, Value = 1f },
+                    new AnimalState { Level = AnimalLevel.FUN, Value = 1f },
+                    new AnimalState { Level = AnimalLevel.SLEEP, Value = 1f }
+                },
+                LastConnection = DateTime.Now,
+                IsAsleep = false,
+                Parents = new string[]
+                {
+                    Unity.Services.Authentication.AuthenticationService.Instance.PlayerId,
+                    _otherPlayerId.text
+                }
             };
 
             RoomManager.Instance.CreateRoom

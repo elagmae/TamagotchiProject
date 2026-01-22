@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Unity.Services.CloudCode;
+using Unity.Services.CloudSave;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
+    public event Action<int> OnMoneyUpdate;
     public bool CanPlay { get; set; }
-    public RoomData RoomData { get; set; } = new() { AnimalStates = new(), AnimalName = "" , ParentNote = "", LastConnection = DateTime.Now};
+    public RoomData RoomData { get; set; } = new() { AnimalStates = new(), AnimalName = "" , LastConnection = DateTime.Now};
     public string RoomId { get; set; }
+    public int Money { get; set; } = 0;
+
+    private CancellationTokenSource _source;
 
     private void Awake()
     {
@@ -23,9 +29,38 @@ public class RoomManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        _source = new();
+        _ = AddMoney(_source);
+    }
+
+    public async Task AddMoney(CancellationTokenSource source)
+    {
+        while(!source.IsCancellationRequested)
+        {
+            await Task.Delay(10000);
+            ChangeMoneyAmount(Money + 1);
+        }
+    }
+
+    public void ChangeMoneyAmount(int money)
+    {
+        Money = money;
+        OnMoneyUpdate?.Invoke(Money);
+    }
+
     public async void UpdateRoom()
     {
         await Task.Yield();
+
+        await CloudSaveService.Instance.Data.Player.SaveAsync
+        (
+            new Dictionary<string, object>
+            {
+                { "Money", Money }
+            }
+        );
 
         RoomData data = RoomData;
         data.LastConnection = DateTime.Now;
@@ -48,7 +83,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public async void CreateRoom(string roomId, string json, string otherPlayer, string animalName, string playerId, string _otherDays, string activeDays)
+    public async void CreateRoom(string roomId, string json, string otherPlayer, string animalName, string playerId, string otherDays, string activeDays)
     {
         try
         {
@@ -60,10 +95,10 @@ public class RoomManager : MonoBehaviour
                 {"otherPlayer", otherPlayer },
                 {"playerId", playerId },
                 {"activeDays", activeDays },
-                {"otherDays", _otherDays }
+                {"otherDays", otherDays }
             };
 
-            object response = await CloudCodeService.Instance.CallEndpointAsync<object>("ItemSetter", parameters);
+            await CloudCodeService.Instance.CallEndpointAsync<object>("ItemSetter", parameters);
 
             Dictionary<string, object> id = new Dictionary<string, object>
             {
@@ -90,6 +125,7 @@ public class RoomManager : MonoBehaviour
     {
         try
         {
+            _source.Cancel();
             if (!Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn) return;
             UpdateRoom();
         }

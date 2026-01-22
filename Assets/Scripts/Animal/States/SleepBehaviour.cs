@@ -9,6 +9,7 @@ public class SleepBehaviour : MonoBehaviour
 
     private void Start()
     {
+        if(RoomManager.Instance == null) return;
         _sleepToggle.isOn = RoomManager.Instance.RoomData.IsAsleep;
     }
 
@@ -16,7 +17,7 @@ public class SleepBehaviour : MonoBehaviour
     {
         await Task.Delay(1000);
 
-        if (StateManager.Instance != null)
+        if (StateManager.Instance != null && RoomManager.Instance != null)
         {
             if (RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount < 1f)
             {
