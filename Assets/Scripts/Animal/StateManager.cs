@@ -86,12 +86,12 @@ public class StateManager : MonoBehaviour
         AnimalState state = RoomManager.Instance.RoomData.AnimalStates[(int)level];
         state.Value += amount;
 
-        if (state.Value > 1f) state.Value = 1f;
+        if (state.Value >= 1f) state.Value = 1f;
 
         StateFills[level].Fill.fillAmount = state.Value;
-        OnFillUpdated?.Invoke(level, state.Value);
-
         RoomManager.Instance.RoomData.AnimalStates[(int)level] = state;
+
+        OnFillUpdated?.Invoke(level, state.Value);
     }
 
     public void RemoveFromState(AnimalLevel level, float amount)
@@ -99,7 +99,7 @@ public class StateManager : MonoBehaviour
         AnimalState state = RoomManager.Instance.RoomData.AnimalStates[(int)level];
         state.Value -= amount;
 
-        if (state.Value < 0f) state.Value = 0f;
+        if (state.Value <= 0f) state.Value = 0f;
 
         StateFills[level].Fill.fillAmount = state.Value;
         OnFillUpdated?.Invoke(level, state.Value);

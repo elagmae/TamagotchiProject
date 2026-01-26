@@ -27,6 +27,21 @@ public class FoodInventoryHandler : MonoBehaviour
         try
         {
             Dictionary<string, Unity.Services.CloudSave.Models.Item> playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { "Inventory" });
+
+            if (!playerData.ContainsKey("Inventory"))
+            {
+                if (Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn)
+                {
+                    await CloudSaveService.Instance.Data.Player.SaveAsync
+                    (
+                        new Dictionary<string, object>
+                        {
+                        { "Inventory", Inventory }
+                        }
+                    );
+                }
+            }
+
             Inventory = playerData["Inventory"].Value.GetAs<Dictionary<string, int>>();
 
             foreach (string name in Inventory.Keys) for (int i = 0; i < Inventory[name]; i++) OnInventoryUpdated?.Invoke(_foods[name], Inventory[name]);

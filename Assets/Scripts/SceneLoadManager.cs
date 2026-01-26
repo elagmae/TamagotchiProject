@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +25,10 @@ public class SceneLoadManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public async void LoadScene(string sceneName)
+    public async Task LoadScene(string sceneName)
     {
+        await Task.Yield();
+
         //add transitions here.
         OnSceneUnloaded?.Invoke(SceneManager.GetActiveScene().name);
         await SceneManager.LoadSceneAsync(sceneName);

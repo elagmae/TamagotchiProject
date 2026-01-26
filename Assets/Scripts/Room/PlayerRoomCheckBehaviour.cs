@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Unity.Services.CloudCode;
 using Unity.Services.CloudSave;
 using UnityEngine;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class PlayerRoomCheckBehaviour : MonoBehaviour
 {
@@ -19,8 +20,12 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
 
     private async void TryLoadRoom()
     {
+        await Task.Yield();
+
         try
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             _loadingPanel.gameObject.SetActive(true);
             Dictionary<string, Unity.Services.CloudSave.Models.Item> playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { "CurrentRoom", "CurrentDays", "Money" });
 
@@ -32,38 +37,54 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
                 }
             );
 
+            print("Money Save - " + stopwatch.ElapsedMilliseconds / 1000f);
+
             if (playerData.ContainsKey("CurrentRoom"))
             {
                 RoomManager.Instance.RoomId = playerData["CurrentRoom"].Value.GetAs<string>();
                 string activeDays = playerData["CurrentDays"].Value.GetAs<string>();
 
-                RoomManager.Instance.Money = playerData["Money"].Value.GetAs<int>();
+                print("CurrentRoom getter - " + stopwatch.ElapsedMilliseconds / 1000f);
+
+                if (playerData.ContainsKey("Money")) RoomManager.Instance.Money = playerData["Money"].Value.GetAs<int>();
+                else RoomManager.Instance.SaveMoney();
+
+                print("Money Getter - " + stopwatch.ElapsedMilliseconds / 1000f);
 
                 Dictionary<string, Unity.Services.CloudSave.Models.Item> room = await CloudSaveService.Instance.Data.Custom.LoadAllAsync(RoomManager.Instance.RoomId);
                 Unity.Services.CloudSave.Internal.Http.IDeserializable infos = room[RoomManager.Instance.RoomId].Value;
 
                 RoomManager.Instance.RoomData = infos.GetAs<RoomData>();
 
+                print("Room Loader - " + stopwatch.ElapsedMilliseconds / 1000f);
+
                 Dictionary<string, object> playerId = new Dictionary<string, object>
                 {
                     { "playerId", Unity.Services.Authentication.AuthenticationService.Instance.PlayerId }
                 };
 
+                print("Id Setter - " + stopwatch.ElapsedMilliseconds / 1000f);
+
                 RoomManager.Instance.CanPlay = await CloudCodeService.Instance.CallEndpointAsync<bool>("DayAnalyzer", playerId);
 
+                print("Day analyzer - " + stopwatch.ElapsedMilliseconds / 1000f);
+
                 string scene = RoomManager.Instance.CanPlay ? "AnimalRoom" : "WaitingRoom";
-                SceneLoadManager.Instance.LoadScene(scene);
+                await SceneLoadManager.Instance.LoadScene(scene);
+
+                print("Load - " + stopwatch.ElapsedMilliseconds / 1000f);
+                stopwatch.Stop();
             }
 
             else
             {
-                SceneLoadManager.Instance.LoadScene("CreationRoom");
+                await SceneLoadManager.Instance.LoadScene("CreationRoom");
             }
         }
 
         catch (Exception ex)
         {
-            Debug.LogException(ex);
+            UnityEngine.Debug.LogException(ex);
         }
     }
 }

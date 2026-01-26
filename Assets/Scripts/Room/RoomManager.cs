@@ -50,10 +50,8 @@ public class RoomManager : MonoBehaviour
         OnMoneyUpdate?.Invoke(Money);
     }
 
-    public async void UpdateRoom()
+    public async void SaveMoney()
     {
-        await Task.Yield();
-
         await CloudSaveService.Instance.Data.Player.SaveAsync
         (
             new Dictionary<string, object>
@@ -61,6 +59,13 @@ public class RoomManager : MonoBehaviour
                 { "Money", Money }
             }
         );
+    }
+
+    public async void UpdateRoom()
+    {
+        await Task.Yield();
+
+        SaveMoney();
 
         RoomData data = RoomData;
         data.LastConnection = DateTime.Now;
@@ -112,7 +117,7 @@ public class RoomManager : MonoBehaviour
             RoomId = roomId;
             RoomData = JsonUtility.FromJson<RoomData>(json);
 
-            SceneLoadManager.Instance.LoadScene(sceneName);
+            await SceneLoadManager.Instance.LoadScene(sceneName);
         }
 
         catch (Exception e)

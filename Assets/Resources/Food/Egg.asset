@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48b408e3343c3b4a867dfb18b2fafc3, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
-  Name: Egg
-  Price: 3
-  FoodIncrease: 0.13
+  Name: Salad
+  Price: 19
+  FoodIncrease: 0.25
