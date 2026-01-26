@@ -1,8 +1,9 @@
-using TMPro;
-using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
+using Unity.Services.CloudCode;
+using UnityEngine;
 
 public class RoomCreationBehaviour : MonoBehaviour
 {
@@ -25,6 +26,20 @@ public class RoomCreationBehaviour : MonoBehaviour
 
         try
         {
+            Dictionary<string, object> id = new()
+            {
+                { "playerId", _otherPlayerId.text.Trim() }
+            };
+
+            bool response = await CloudCodeService.Instance.CallEndpointAsync<bool>("RoomChecker", id);
+            print("empty partner = " + response);
+
+            if (!response)
+            {
+                Debug.LogWarning("The other player already owns a pet, try finding another partner");
+                return;
+            }
+
             if (_animalDisplay.text == string.Empty || _otherPlayerId.text == string.Empty)
             {
                 Debug.LogWarning("Values aren't all assigned !");

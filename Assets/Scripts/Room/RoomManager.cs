@@ -135,9 +135,9 @@ public class RoomManager : MonoBehaviour
             UpdateRoom();
         }
 
-        catch
+        catch(Exception e)
         {
-
+            Debug.LogException(e);
         }
     }
 }
