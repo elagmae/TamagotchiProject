@@ -79,7 +79,6 @@ public class RoomCreationBehaviour : MonoBehaviour
 
         catch(Exception e)
         {
-            Debug.LogError("Deception pro max");
             Debug.LogException(e);
         }
 

@@ -13,10 +13,12 @@ public class ShowerBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnBeginDrag(PointerEventData eventData)
     {
         _defaultPos = transform.position;
+        print("touched");
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        print("drag");
         if (RoomManager.Instance.RoomData.IsAsleep) return;
         bool isShowering = RectTransformUtility.RectangleContainsScreenPoint(StateManager.Instance.Animal.rectTransform, eventData.position);
 
@@ -30,6 +32,7 @@ public class ShowerBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        print("stop");
         transform.position = _defaultPos;
     }
 }

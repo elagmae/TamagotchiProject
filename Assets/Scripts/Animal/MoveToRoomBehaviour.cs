@@ -16,7 +16,7 @@ public class MoveToRoomBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        _currentRoomIndex = 3;
+        _currentRoomIndex = 0;
 
         _leftButton.onClick.AddListener(() => MoveToNextRoom(-1));
         _rightButton.onClick.AddListener(() => MoveToNextRoom(1));
