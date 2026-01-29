@@ -1,6 +1,7 @@
 using AYellowpaper.SerializedCollections;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.CloudSave;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class FoodInventoryHandler : MonoBehaviour
     [field: SerializeField]
     public SerializedDictionary<FoodData, Sprite> FoodVisuals { get; set; } = new();
 
-    public Dictionary<string, int> Inventory { get; private set; } = new();
+    public static Dictionary<string, int> Inventory { get; private set; } = new();
 
     private Dictionary<string, FoodData> _foods = new();
 
@@ -73,7 +74,7 @@ public class FoodInventoryHandler : MonoBehaviour
         }
     }
 
-    private async void OnApplicationQuit()
+    public static async Task SaveInventory()
     {
         try
         {

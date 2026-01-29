@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,8 @@ public class SceneLoadManager : MonoBehaviour
 
     public async Task LoadScene(string sceneName)
     {
+        if (sceneName == "Exit") Exit();
+
         await Task.Yield();
 
         //add transitions here.
@@ -35,5 +38,28 @@ public class SceneLoadManager : MonoBehaviour
         OnSceneLoaded?.Invoke(sceneName);
 
         UserPanel.gameObject.SetActive(sceneName != "Connection" && sceneName != "Menu");
+    }
+
+    public async Task SaveGame()
+    {
+        await RoomManager.Instance.UpdateRoom();
+        await RoomManager.Instance.SaveMoney();
+        await FoodInventoryHandler.SaveInventory();
+    }
+
+    public async void Exit()
+    {
+        await Task.Yield();
+        await SaveGame();
+
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#endif
+        Application.Quit();
+    }
+
+    private async void OnApplicationQuit()
+    {
+        await SaveGame();
     }
 }

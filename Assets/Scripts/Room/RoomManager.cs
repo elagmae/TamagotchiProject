@@ -50,7 +50,7 @@ public class RoomManager : MonoBehaviour
         OnMoneyUpdate?.Invoke(Money);
     }
 
-    public async void SaveMoney()
+    public async Task SaveMoney()
     {
         await CloudSaveService.Instance.Data.Player.SaveAsync
         (
@@ -61,7 +61,7 @@ public class RoomManager : MonoBehaviour
         );
     }
 
-    public async void UpdateRoom()
+    public async Task UpdateRoom()
     {
         await Task.Yield();
 
@@ -88,7 +88,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public async void CreateRoom(string roomId, string json, string otherPlayer, string animalName, string playerId, string otherDays, string activeDays)
+    public async Task CreateRoom(string roomId, string json, string otherPlayer, string animalName, string playerId, string otherDays, string activeDays)
     {
         try
         {
@@ -126,13 +126,13 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+    private async void OnApplicationQuit()
     {
         try
         {
             _source.Cancel();
             if (!Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn) return;
-            UpdateRoom();
+            await UpdateRoom();
         }
 
         catch(Exception e)
