@@ -47,7 +47,7 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
                 print("CurrentRoom getter - " + stopwatch.ElapsedMilliseconds / 1000f);
 
                 if (playerData.ContainsKey("Money")) RoomManager.Instance.Money = playerData["Money"].Value.GetAs<int>();
-                else RoomManager.Instance.SaveMoney();
+                else await RoomManager.Instance.SaveMoney();
 
                 print("Money Getter - " + stopwatch.ElapsedMilliseconds / 1000f);
 

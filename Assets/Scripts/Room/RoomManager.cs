@@ -65,7 +65,7 @@ public class RoomManager : MonoBehaviour
     {
         await Task.Yield();
 
-        SaveMoney();
+        await SaveMoney();
 
         RoomData data = RoomData;
         data.LastConnection = DateTime.Now;
@@ -123,21 +123,6 @@ public class RoomManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError(e);
-        }
-    }
-
-    private async void OnApplicationQuit()
-    {
-        try
-        {
-            _source.Cancel();
-            if (!Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn) return;
-            await UpdateRoom();
-        }
-
-        catch(Exception e)
-        {
-            Debug.LogException(e);
         }
     }
 }

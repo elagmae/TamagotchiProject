@@ -11,7 +11,12 @@ public class ClickListenerBehaviour : MonoBehaviour
     {
         foreach (Button button in _sceneButtons.Keys)
         {
-            button.onClick.AddListener(() => SceneLoadManager.Instance.LoadScene(_sceneButtons[button]));
+            button.onClick.AddListener(() => ChangeScene(button));
         }
+    }
+
+    public async void ChangeScene(Button button)
+    {
+        await SceneLoadManager.Instance.LoadScene(_sceneButtons[button]);
     }
 }

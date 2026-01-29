@@ -65,7 +65,7 @@ public class RoomCreationBehaviour : MonoBehaviour
                 }
             };
 
-            RoomManager.Instance.CreateRoom
+            await RoomManager.Instance.CreateRoom
             (
                 CreateRoomId(),
                 JsonUtility.ToJson(RoomManager.Instance.RoomData),  

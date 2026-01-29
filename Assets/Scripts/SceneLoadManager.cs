@@ -28,7 +28,11 @@ public class SceneLoadManager : MonoBehaviour
 
     public async Task LoadScene(string sceneName)
     {
-        if (sceneName == "Exit") Exit();
+        if (sceneName == "Exit")
+        {
+            Exit();
+            return;
+        }
 
         await Task.Yield();
 
