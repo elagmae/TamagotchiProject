@@ -37,26 +37,18 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
                 }
             );
 
-            print("Money Save - " + stopwatch.ElapsedMilliseconds / 1000f);
-
             if (playerData.ContainsKey("CurrentRoom"))
             {
                 RoomManager.Instance.RoomId = playerData["CurrentRoom"].Value.GetAs<string>();
                 string activeDays = playerData["CurrentDays"].Value.GetAs<string>();
 
-                print("CurrentRoom getter - " + stopwatch.ElapsedMilliseconds / 1000f);
-
                 if (playerData.ContainsKey("Money")) RoomManager.Instance.Money = playerData["Money"].Value.GetAs<int>();
                 else await RoomManager.Instance.SaveMoney();
-
-                print("Money Getter - " + stopwatch.ElapsedMilliseconds / 1000f);
 
                 Dictionary<string, Unity.Services.CloudSave.Models.Item> room = await CloudSaveService.Instance.Data.Custom.LoadAllAsync(RoomManager.Instance.RoomId);
                 Unity.Services.CloudSave.Internal.Http.IDeserializable infos = room[RoomManager.Instance.RoomId].Value;
 
                 RoomManager.Instance.RoomData = infos.GetAs<RoomData>();
-
-                print("Room Loader - " + stopwatch.ElapsedMilliseconds / 1000f);
 
                 Dictionary<string, object> playerId = new Dictionary<string, object>
                 {
@@ -72,7 +64,6 @@ public class PlayerRoomCheckBehaviour : MonoBehaviour
                 string scene = RoomManager.Instance.CanPlay ? "AnimalRoom" : "WaitingRoom";
                 await SceneLoadManager.Instance.LoadScene(scene);
 
-                print("Load - " + stopwatch.ElapsedMilliseconds / 1000f);
                 stopwatch.Stop();
             }
 

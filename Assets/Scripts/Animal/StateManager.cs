@@ -62,6 +62,8 @@ public class StateManager : MonoBehaviour
         if (RoomManager.Instance.RoomData.LastConnection.Year < 2000) return;
         double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds;
 
+        print(timeAway);
+
         if ((int)timeAway / 10 < 0) return;
         RoomManager.Instance.ChangeMoneyAmount(RoomManager.Instance.Money + (int)timeAway / 10);
     }

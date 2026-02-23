@@ -68,7 +68,7 @@ public class RoomManager : MonoBehaviour
         await SaveMoney();
 
         RoomData data = RoomData;
-        data.LastConnection = DateTime.Now;
+        data.LastConnection = DateTime.UtcNow;
         RoomData = data;
 
         var save = new Dictionary<string, object>

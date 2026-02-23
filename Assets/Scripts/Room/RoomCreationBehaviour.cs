@@ -13,6 +13,9 @@ public class RoomCreationBehaviour : MonoBehaviour
     [SerializeField]
     private TMP_InputField _otherPlayerId;
 
+    [SerializeField]
+    private GameObject _loadingPanel;
+
     private ActiveDaysHandler _planning;
 
     private void Awake()
@@ -32,11 +35,12 @@ public class RoomCreationBehaviour : MonoBehaviour
             };
 
             bool response = await CloudCodeService.Instance.CallEndpointAsync<bool>("RoomChecker", id);
-            print("empty partner = " + response);
+
+            await Task.Delay(100);
 
             if (!response)
             {
-                Debug.LogWarning("The other player already owns a pet, try finding another partner");
+                Debug.LogWarning("There is a problem with your partner's id. The other player may already own a pet, or their id is incorrect. Try with another id.");
                 return;
             }
 
@@ -45,6 +49,8 @@ public class RoomCreationBehaviour : MonoBehaviour
                 Debug.LogWarning("Values aren't all assigned !");
                 return;
             }
+
+            _loadingPanel.SetActive(true);
 
             RoomManager.Instance.RoomData = new RoomData()
             {

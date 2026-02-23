@@ -7234,22 +7234,22 @@ MonoBehaviour:
     - Key: 0
       Value:
         Fill: {fileID: 1800483066}
-        DecreasingSpeed: 0.003
+        DecreasingSpeed: 0.0003
         AssignedRoom: {fileID: 1687002839}
     - Key: 2
       Value:
         Fill: {fileID: 509679447}
-        DecreasingSpeed: 0.004
+        DecreasingSpeed: 0.0004
         AssignedRoom: {fileID: 456850399}
     - Key: 3
       Value:
         Fill: {fileID: 888528915}
-        DecreasingSpeed: 0.01
+        DecreasingSpeed: 0.0008
         AssignedRoom: {fileID: 820168504}
     - Key: 1
       Value:
         Fill: {fileID: 1202205799}
-        DecreasingSpeed: 0.005
+        DecreasingSpeed: 0.0005
         AssignedRoom: {fileID: 531473561}
   <FoodInventoryHandler>k__BackingField: {fileID: 413117175}
   <Animal>k__BackingField: {fileID: 1794255500}
