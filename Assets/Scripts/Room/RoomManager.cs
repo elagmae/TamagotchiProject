@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviour
     public bool CanPlay { get; set; }
     public RoomData RoomData { get; set; } = new() { AnimalStates = new(), AnimalName = "" , LastConnection = DateTime.Now};
     public string RoomId { get; set; }
-    public int Money { get; set; } = 0;
+    public int Money { get; set; } = 30;
 
     private CancellationTokenSource _source;
 
@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour
     {
         while(!source.IsCancellationRequested)
         {
-            await Task.Delay(10000);
+            await Task.Delay(100000000);
             ChangeMoneyAmount(Money + 1);
         }
     }
