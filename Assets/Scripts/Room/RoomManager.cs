@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Services.CloudCode;
 using Unity.Services.CloudSave;
 using UnityEngine;
@@ -122,7 +123,7 @@ public class RoomManager : MonoBehaviour
 
         catch (Exception e)
         {
-            Debug.LogError(e);
+            Debug.LogException(e);
         }
     }
 }

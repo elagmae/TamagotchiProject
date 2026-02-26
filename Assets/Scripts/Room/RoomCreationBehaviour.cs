@@ -15,8 +15,11 @@ public class RoomCreationBehaviour : MonoBehaviour
 
     [SerializeField]
     private GameObject _loadingPanel;
-
+    [SerializeField]
+    private TextMeshProUGUI _errorMsg;
     private ActiveDaysHandler _planning;
+    [SerializeField]
+    private GameObject _loadingScreen;
 
     private void Awake()
     {
@@ -29,6 +32,14 @@ public class RoomCreationBehaviour : MonoBehaviour
 
         try
         {
+            if (_animalDisplay.text == string.Empty || _otherPlayerId.text == string.Empty || _planning.GetDays()[0].Day.Count < 1)
+            {
+                _errorMsg.text = "Values aren't all assigned !";
+                _errorMsg.transform.parent.transform.parent.gameObject.SetActive(true);
+                return;
+            }
+
+            _errorMsg.transform.parent.transform.parent.gameObject.SetActive(false);
             Dictionary<string, object> id = new()
             {
                 { "playerId", _otherPlayerId.text.Trim() }
@@ -40,13 +51,8 @@ public class RoomCreationBehaviour : MonoBehaviour
 
             if (!response)
             {
-                Debug.LogWarning("There is a problem with your partner's id. The other player may already own a pet, or their id is incorrect. Try with another id.");
-                return;
-            }
-
-            if (_animalDisplay.text == string.Empty || _otherPlayerId.text == string.Empty)
-            {
-                Debug.LogWarning("Values aren't all assigned !");
+                _errorMsg.text = "There is a problem with your partner's id. The other player may already own a pet, or their id is incorrect. Try with another id.";
+                _errorMsg.transform.parent.transform.parent.gameObject.SetActive(true);
                 return;
             }
 
@@ -81,11 +87,14 @@ public class RoomCreationBehaviour : MonoBehaviour
                 JsonUtility.ToJson(_planning.GetDays()[1]), 
                 JsonUtility.ToJson(_planning.GetDays()[0])
             );
+
+            _loadingScreen.SetActive(true);
         }
 
         catch(Exception e)
         {
-            Debug.LogException(e);
+            _errorMsg.text = e.Message;
+            _errorMsg.transform.parent.transform.parent.gameObject.SetActive(true);
         }
 
     }
