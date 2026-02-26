@@ -21,7 +21,7 @@ public class EatingBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (RoomManager.Instance.RoomData.IsAsleep) return;
 
-        bool canFeed = RectTransformUtility.RectangleContainsScreenPoint(StateManager.Instance.Animal.rectTransform, eventData.position);
+        bool canFeed = RectTransformUtility.RectangleContainsScreenPoint(StateManager.Instance.Animal.rectTransform, eventData.pointerCurrentRaycast.screenPosition, Camera.main);
 
         if (canFeed)
         {
@@ -35,6 +35,6 @@ public class EatingBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnDrag(PointerEventData eventData)
     {
         if (RoomManager.Instance.RoomData.IsAsleep) return;
-        transform.position = eventData.position;
+        transform.position = eventData.pointerCurrentRaycast.worldPosition;
     }
 }
