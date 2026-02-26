@@ -21,7 +21,7 @@ public class SleepBehaviour : MonoBehaviour
         {
             if (RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount < 1f)
             {
-                StateManager.Instance.AddToState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed / 3600f);
+                StateManager.Instance.AddToState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed / 1800f);
             }
 
             else if (!RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount > 0f)

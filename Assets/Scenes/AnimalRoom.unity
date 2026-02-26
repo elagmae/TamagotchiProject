@@ -7316,22 +7316,22 @@ MonoBehaviour:
     - Key: 0
       Value:
         Fill: {fileID: 1800483066}
-        DecreasingSpeed: 10
+        DecreasingSpeed: 5
         AssignedRoom: {fileID: 1687002839}
     - Key: 2
       Value:
         Fill: {fileID: 509679447}
-        DecreasingSpeed: 10
+        DecreasingSpeed: 3
         AssignedRoom: {fileID: 456850399}
     - Key: 3
       Value:
         Fill: {fileID: 888528915}
-        DecreasingSpeed: 10
+        DecreasingSpeed: 7
         AssignedRoom: {fileID: 820168504}
     - Key: 1
       Value:
         Fill: {fileID: 1202205799}
-        DecreasingSpeed: 10
+        DecreasingSpeed: 1
         AssignedRoom: {fileID: 531473561}
   <FoodInventoryHandler>k__BackingField: {fileID: 413117175}
   <Animal>k__BackingField: {fileID: 1794255500}
