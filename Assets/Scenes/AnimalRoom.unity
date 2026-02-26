@@ -2727,7 +2727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowerBehaviour
   _cleanseThreshold: 20
-  _cleanseAmount: 0.001
+  _cleanseAmount: 0.0015
 --- !u!1 &339530939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,7 +3530,6 @@ GameObject:
   - component: {fileID: 456850399}
   - component: {fileID: 456850401}
   - component: {fileID: 456850400}
-  - component: {fileID: 456850402}
   m_Layer: 5
   m_Name: BathroomPanel
   m_TagString: Untagged
@@ -3596,21 +3595,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456850398}
   m_CullTransparentMesh: 1
---- !u!114 &456850402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456850398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 10, y: -10}
-  m_UseGraphicAlpha: 1
 --- !u!1 &476933742
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,7 +4028,6 @@ GameObject:
   - component: {fileID: 531473561}
   - component: {fileID: 531473563}
   - component: {fileID: 531473562}
-  - component: {fileID: 531473564}
   m_Layer: 5
   m_Name: BedroomPanel
   m_TagString: Untagged
@@ -4110,21 +4093,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531473560}
   m_CullTransparentMesh: 1
---- !u!114 &531473564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531473560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 10, y: -10}
-  m_UseGraphicAlpha: 1
 --- !u!1 &536380469
 GameObject:
   m_ObjectHideFlags: 0
@@ -6046,7 +6014,6 @@ GameObject:
   - component: {fileID: 820168504}
   - component: {fileID: 820168506}
   - component: {fileID: 820168505}
-  - component: {fileID: 820168507}
   m_Layer: 5
   m_Name: GamePanel
   m_TagString: Untagged
@@ -6111,21 +6078,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820168503}
   m_CullTransparentMesh: 1
---- !u!114 &820168507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 820168503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 10, y: -10}
-  m_UseGraphicAlpha: 1
 --- !u!1 &826282046
 GameObject:
   m_ObjectHideFlags: 0
@@ -7235,22 +7187,22 @@ MonoBehaviour:
     - Key: 0
       Value:
         Fill: {fileID: 1800483066}
-        DecreasingSpeed: 0.003
+        DecreasingSpeed: 10
         AssignedRoom: {fileID: 1687002839}
     - Key: 2
       Value:
         Fill: {fileID: 509679447}
-        DecreasingSpeed: 0.004
+        DecreasingSpeed: 10
         AssignedRoom: {fileID: 456850399}
     - Key: 3
       Value:
         Fill: {fileID: 888528915}
-        DecreasingSpeed: 0.008
+        DecreasingSpeed: 10
         AssignedRoom: {fileID: 820168504}
     - Key: 1
       Value:
         Fill: {fileID: 1202205799}
-        DecreasingSpeed: 0.005
+        DecreasingSpeed: 10
         AssignedRoom: {fileID: 531473561}
   <FoodInventoryHandler>k__BackingField: {fileID: 413117175}
   <Animal>k__BackingField: {fileID: 1794255500}
@@ -11660,7 +11612,6 @@ GameObject:
   - component: {fileID: 1687002839}
   - component: {fileID: 1687002841}
   - component: {fileID: 1687002840}
-  - component: {fileID: 1687002842}
   m_Layer: 5
   m_Name: KitchenPanel
   m_TagString: Untagged
@@ -11726,21 +11677,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687002838}
   m_CullTransparentMesh: 1
---- !u!114 &1687002842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687002838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 10, y: -10}
-  m_UseGraphicAlpha: 1
 --- !u!1 &1702792037
 GameObject:
   m_ObjectHideFlags: 0
@@ -12341,6 +12277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2518e3e24dc5829419d45b89a244bc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AffectionBehaviour
+  _affectionIncreaseAmount: 0.05
 --- !u!1 &1800483064
 GameObject:
   m_ObjectHideFlags: 0

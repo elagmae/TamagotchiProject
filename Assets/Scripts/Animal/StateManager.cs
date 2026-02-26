@@ -62,10 +62,8 @@ public class StateManager : MonoBehaviour
         if (RoomManager.Instance.RoomData.LastConnection.Year < 2000) return;
         double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds;
 
-        print(timeAway);
-
-        if ((int)timeAway / 10 < 0) return;
-        RoomManager.Instance.ChangeMoneyAmount(RoomManager.Instance.Money + (int)timeAway / 10);
+        if ((int)timeAway < 0) return;
+        RoomManager.Instance.ChangeMoneyAmount(RoomManager.Instance.Money + (int)(timeAway / 60f));
     }
 
     #endregion
@@ -78,7 +76,7 @@ public class StateManager : MonoBehaviour
 
             if (Instance != null && StateFills != null && StateFills[level].Fill.fillAmount > 0f && level != AnimalLevel.SLEEP)
             {
-                RemoveFromState(level, Time.deltaTime * StateFills[level].DecreasingSpeed);
+                RemoveFromState(level, Time.deltaTime * StateFills[level].DecreasingSpeed / 3600f);
             }
         }
     }

@@ -21,12 +21,12 @@ public class SleepBehaviour : MonoBehaviour
         {
             if (RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount < 1f)
             {
-                StateManager.Instance.AddToState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed);
+                StateManager.Instance.AddToState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed / 3600f);
             }
 
             else if (!RoomManager.Instance.RoomData.IsAsleep && StateManager.Instance.StateFills[AnimalLevel.SLEEP].Fill.fillAmount > 0f)
             {
-                StateManager.Instance.RemoveFromState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed);
+                StateManager.Instance.RemoveFromState(AnimalLevel.SLEEP, Time.deltaTime * StateManager.Instance.StateFills[AnimalLevel.SLEEP].DecreasingSpeed / 3600f);
             }
         }
     }

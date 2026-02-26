@@ -5,21 +5,19 @@ public class StatesBeforeLoadBehaviour : MonoBehaviour
 {
     public void CalculateAwayFills(AnimalLevel level)
     {
-        if (RoomManager.Instance.RoomData.LastConnection.Year < 2000) return;
+        var lastConnection = RoomManager.Instance.RoomData.LastConnection;
 
-        double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds;
-        print("timeAway: " + timeAway);
+        if (lastConnection.Year < 2000) return;
 
-        if (level == AnimalLevel.SLEEP && RoomManager.Instance.RoomData.IsAsleep)
-        {
-            StateManager.Instance.AddToState(level, (float)timeAway * Time.deltaTime * StateManager.Instance.StateFills[level].DecreasingSpeed);
-            print($"{level} increased by {(float)timeAway/10f * Time.deltaTime * StateManager.Instance.StateFills[level].DecreasingSpeed}");
-        }
+        double timeAway = (DateTime.Now - lastConnection).TotalSeconds;
 
-        else
-        {
-            StateManager.Instance.RemoveFromState(level, (float)timeAway * Time.deltaTime * StateManager.Instance.StateFills[level].DecreasingSpeed);
-            print($"{level} decreased by {(float)timeAway/10f * Time.deltaTime * StateManager.Instance.StateFills[level].DecreasingSpeed}");
-        }
+        if (timeAway <= 0) return;
+
+        timeAway = Math.Min(timeAway, 86400);
+
+        float amount = (float)(timeAway / 60f) * StateManager.Instance.StateFills[level].DecreasingSpeed / 3600f;
+
+        if (level == AnimalLevel.SLEEP && RoomManager.Instance.RoomData.IsAsleep) StateManager.Instance.AddToState(level, amount);
+        else StateManager.Instance.RemoveFromState(level, amount);
     }
 }

@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 90398206}
   - component: {fileID: 90398208}
   - component: {fileID: 90398209}
+  - component: {fileID: 90398210}
   m_Layer: 0
   m_Name: Authentication
   m_TagString: Untagged
@@ -330,6 +331,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRoomCheckBehaviour
   _loadingPanel: {fileID: 1027567639}
+--- !u!114 &90398210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90398204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a9bff385c5ffa4896395f527ce2bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PasswordShowBehaviour
+  _password: {fileID: 1356967148}
 --- !u!1 &263890212
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +504,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 90398210}
         m_TargetAssemblyTypeName: PasswordShowBehaviour, Assembly-CSharp
         m_MethodName: ShowPassword
         m_Mode: 0
