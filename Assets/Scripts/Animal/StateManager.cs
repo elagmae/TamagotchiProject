@@ -60,23 +60,22 @@ public class StateManager : MonoBehaviour
         _animalName.text = RoomManager.Instance.RoomData.AnimalName;
 
         if (RoomManager.Instance.RoomData.LastConnection.Year < 2000) return;
-        double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds;
+        double timeAway = (DateTime.Now - RoomManager.Instance.RoomData.LastConnection).TotalSeconds / 3600f;
 
         if ((int)timeAway < 0) return;
-        RoomManager.Instance.ChangeMoneyAmount(RoomManager.Instance.Money + (int)(timeAway / 60f));
+        RoomManager.Instance.ChangeMoneyAmount(RoomManager.Instance.Money + (int)(timeAway));
     }
 
     #endregion
 
-    private async void Update()
+    private void Update()
     {
         foreach (AnimalLevel level in StateFills.Keys)
         {
-            await Task.Delay(1000);
-
-            if (Instance != null && StateFills != null && StateFills[level].Fill.fillAmount > 0f && level != AnimalLevel.SLEEP)
+            if (StateFills[level].Fill.fillAmount > 0f && level != AnimalLevel.SLEEP)
             {
-                RemoveFromState(level, Time.deltaTime * StateFills[level].DecreasingSpeed / 3600f);
+                float amount = (Time.deltaTime / 3600f) * StateFills[level].DecreasingSpeed;
+                RemoveFromState(level, amount);
             }
         }
     }

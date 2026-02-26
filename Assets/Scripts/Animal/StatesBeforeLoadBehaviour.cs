@@ -9,13 +9,13 @@ public class StatesBeforeLoadBehaviour : MonoBehaviour
 
         if (lastConnection.Year < 2000) return;
 
-        double timeAway = (DateTime.Now - lastConnection).TotalSeconds;
+        double timeAway = (DateTime.UtcNow - lastConnection).TotalSeconds;
 
         if (timeAway <= 0) return;
 
-        timeAway = Math.Min(timeAway, 86400);
+        float amount = ((float)timeAway / 3600f) * StateManager.Instance.StateFills[level].DecreasingSpeed;
 
-        float amount = (float)(timeAway / 60f) * StateManager.Instance.StateFills[level].DecreasingSpeed / 3600f;
+        print(amount);
 
         if (level == AnimalLevel.SLEEP && RoomManager.Instance.RoomData.IsAsleep) StateManager.Instance.AddToState(level, amount);
         else StateManager.Instance.RemoveFromState(level, amount);
