@@ -1317,6 +1317,7 @@ GameObject:
   - component: {fileID: 93297121}
   - component: {fileID: 93297123}
   - component: {fileID: 93297122}
+  - component: {fileID: 93297124}
   m_Layer: 5
   m_Name: Hygiene
   m_TagString: Untagged
@@ -1361,7 +1362,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1383,6 +1384,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93297120}
   m_CullTransparentMesh: 1
+--- !u!114 &93297124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93297120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.31132066, g: 0.7363193, b: 1, a: 0}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &95943233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2702,8 +2718,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 563, y: -201}
-  m_SizeDelta: {x: 148.7002, y: 100}
+  m_AnchoredPosition: {x: 580.9492, y: -196.02606}
+  m_SizeDelta: {x: 184.5991, y: 109.9479}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329006121
 MonoBehaviour:
@@ -2727,13 +2743,13 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -8030576672439078271, guid: 20db79bd1c8e23b47b800ce5450ee9e4, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &329006122
 CanvasRenderer:
@@ -3859,6 +3875,7 @@ GameObject:
   - component: {fileID: 509679446}
   - component: {fileID: 509679448}
   - component: {fileID: 509679447}
+  - component: {fileID: 509679449}
   m_Layer: 5
   m_Name: HygieneFill
   m_TagString: Untagged
@@ -3923,6 +3940,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509679445}
   m_CullTransparentMesh: 1
+--- !u!114 &509679449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509679445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd728c098225f5b43b3aa78f07e9fbd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateColorOutlineFeedback
+  _outline: {fileID: 93297124}
 --- !u!1 &517524330
 GameObject:
   m_ObjectHideFlags: 0
@@ -6490,6 +6520,7 @@ GameObject:
   - component: {fileID: 888528914}
   - component: {fileID: 888528916}
   - component: {fileID: 888528915}
+  - component: {fileID: 888528917}
   m_Layer: 5
   m_Name: FunFill
   m_TagString: Untagged
@@ -6554,6 +6585,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888528913}
   m_CullTransparentMesh: 1
+--- !u!114 &888528917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888528913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd728c098225f5b43b3aa78f07e9fbd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateColorOutlineFeedback
+  _outline: {fileID: 1176396604}
 --- !u!1 &890061006
 GameObject:
   m_ObjectHideFlags: 0
@@ -7381,6 +7425,7 @@ GameObject:
   - component: {fileID: 1067129901}
   - component: {fileID: 1067129903}
   - component: {fileID: 1067129902}
+  - component: {fileID: 1067129904}
   m_Layer: 5
   m_Name: Sleep
   m_TagString: Untagged
@@ -7425,7 +7470,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7447,6 +7492,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067129900}
   m_CullTransparentMesh: 1
+--- !u!114 &1067129904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067129900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.31132066, g: 0.7363193, b: 1, a: 0}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1075016857
 GameObject:
   m_ObjectHideFlags: 0
@@ -8299,6 +8359,7 @@ GameObject:
   - component: {fileID: 1176396601}
   - component: {fileID: 1176396603}
   - component: {fileID: 1176396602}
+  - component: {fileID: 1176396604}
   m_Layer: 5
   m_Name: Fun
   m_TagString: Untagged
@@ -8343,7 +8404,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8365,6 +8426,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176396600}
   m_CullTransparentMesh: 1
+--- !u!114 &1176396604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176396600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.31132066, g: 0.7363193, b: 1, a: 0}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1189365264
 GameObject:
   m_ObjectHideFlags: 0
@@ -8590,6 +8666,7 @@ GameObject:
   - component: {fileID: 1202205801}
   - component: {fileID: 1202205800}
   - component: {fileID: 1202205799}
+  - component: {fileID: 1202205802}
   m_Layer: 5
   m_Name: SleepFill
   m_TagString: Untagged
@@ -8654,6 +8731,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1202205802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202205798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd728c098225f5b43b3aa78f07e9fbd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateColorOutlineFeedback
+  _outline: {fileID: 1067129904}
 --- !u!1 &1214794003
 GameObject:
   m_ObjectHideFlags: 0
@@ -12471,6 +12561,7 @@ GameObject:
   - component: {fileID: 1800483065}
   - component: {fileID: 1800483067}
   - component: {fileID: 1800483066}
+  - component: {fileID: 1800483068}
   m_Layer: 5
   m_Name: FoodFill
   m_TagString: Untagged
@@ -12509,7 +12600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 88b718cab4caa4f438774388f50d9c06, type: 2}
   m_Color: {r: 0.36401916, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -12535,6 +12626,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800483064}
   m_CullTransparentMesh: 1
+--- !u!114 &1800483068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800483064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd728c098225f5b43b3aa78f07e9fbd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateColorOutlineFeedback
+  _outline: {fileID: 2099005820}
 --- !u!1 &1802691894
 GameObject:
   m_ObjectHideFlags: 0
@@ -13576,7 +13680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1971144846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14439,6 +14543,7 @@ GameObject:
   - component: {fileID: 2099005817}
   - component: {fileID: 2099005819}
   - component: {fileID: 2099005818}
+  - component: {fileID: 2099005820}
   m_Layer: 5
   m_Name: Food
   m_TagString: Untagged
@@ -14483,7 +14588,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -14505,6 +14610,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099005816}
   m_CullTransparentMesh: 1
+--- !u!114 &2099005820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099005816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0.31132066, g: 0.7363193, b: 1, a: 0}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2102674510
 GameObject:
   m_ObjectHideFlags: 0
