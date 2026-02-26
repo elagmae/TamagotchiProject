@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8576d580c9b1ad244b1773b239daa9dc
+guid: 20db79bd1c8e23b47b800ce5450ee9e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -131199687727536385
-    second: Nut_Icon_0
+      213: -8030576672439078271
+    second: Sponge_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Nut_Icon_0
+      name: Sponge_0
       rect:
         serializedVersion: 2
-        x: 82
-        y: 73
-        width: 333
-        height: 376
+        x: 0
+        y: 77
+        width: 512
+        height: 358
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff6ab524492ed2ef0800000000000000
-      internalID: -131199687727536385
+      spriteID: 182fab17019ad8090800000000000000
+      internalID: -8030576672439078271
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Nut_Icon_0: -131199687727536385
+      Sponge_0: -8030576672439078271
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
